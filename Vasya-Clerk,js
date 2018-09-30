@@ -1,0 +1,44 @@
+function tickets(peopleInLine){
+
+  let result = 'YES';
+  let box25 = 0;
+  let box50 = 0;
+  let box100 = 0;
+
+  for (var i = 0; i < peopleInLine.length; i++) {
+    
+    let isPossible = true;
+    let line = peopleInLine[i];
+    switch (line) {
+      case 25:
+        box25++;
+        break;
+
+      case 50:
+        box50++;
+        if (box25 > 0) {
+          box25--;
+        } else {
+          isPossible = false;
+        }
+        break;
+
+      case 100:
+        box100++;
+        if (box50 > 0 && box25 > 0) {
+          box50--;
+          box25--;
+        } else if (box25 > 2) {
+          box25 = box25 - 3;
+        } else {
+          isPossible = false;
+        }
+        break;
+    }
+    if (!isPossible) {
+      result = 'NO'
+      break;
+    }
+  }
+  return result;
+}
